@@ -31,6 +31,14 @@ This file records how AI tools were used while building Awesome Notes. It is upd
   - Actions are handled one at a time in a `LaunchedEffect` keyed by that id, and consumed afterwards.
   - Actions don't go into `SavedStateHandle`.
 - **Outcome:** I accepted the design. I chose to put the action-consuming logic in a shared helper in `core:ui`, so no screen can forget to consume.
+
+### 3. Fitting the server into the Gradle build (Claude Code, Opus 5.5)
+
+- **Prompt (summary):** Set up the Ktor server skeleton (`GET /health`, `Dockerfile`, `docker-compose.yml`). My plan had the server as a `:server` module of the root Gradle build.
+- **What the AI did:** before writing any file, it pointed out that the plan would break the Docker build. Gradle configures every module before running a task, and `:app` applies the Android plugin, which needs the Android SDK. The image has no SDK, so even `:server:buildFatJar` would fail. It offered two options:
+  - make `server/` a separate build, reusing the root version catalog and pulled in with `includeBuild("server")`
+  - keep `:server` and skip the Android modules when an environment variable is set
+- **Outcome:** I chose the separate build. Docker runs `./gradlew -p server buildFatJar` and never touches the Android modules. There is still one version catalog and one Gradle wrapper. I checked it end to end: the tests pass, `docker compose up --build` starts the server, and `GET /health` returns `200 OK`.
 ## Corrections and rejections
 
 | Date | Tool | What the AI suggested | What I did instead | Why |

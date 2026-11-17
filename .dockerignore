@@ -1,0 +1,9 @@
+**/build
+**/.gradle
+**/.kotlin
+.git
+.idea
+local.properties
+app
+core
+feature

@@ -25,3 +25,4 @@ dependencyResolutionManagement {
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "AwesomeNotes"
 include(":app")
+includeBuild("server")

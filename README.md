@@ -14,7 +14,7 @@ awesome-notes/
 ├── app/                   # Android app module (composition root)
 ├── core/                  # domain, data, network, storage, database, ui
 ├── feature/               # auth, notes
-├── server/                # Ktor backend (Gradle module :server, own Dockerfile)
+├── server/                # Ktor backend (separate Gradle build, own Dockerfile)
 ├── docker-compose.yml
 └── AI_USAGE.md            # How AI tools were used in this project
 ```
