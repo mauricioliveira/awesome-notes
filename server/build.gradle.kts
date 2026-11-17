@@ -25,6 +25,10 @@ dependencies {
     implementation(libs.ktor.server.call.logging)
     implementation(libs.ktor.server.swagger)
     implementation(libs.logback.classic)
+    implementation(libs.exposed.core)
+    implementation(libs.exposed.jdbc)
+    implementation(libs.postgresql)
+    implementation(libs.hikari)
 
     testImplementation(libs.ktor.server.test.host)
     testImplementation(kotlin("test"))

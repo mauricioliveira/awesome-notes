@@ -1,7 +1,31 @@
 services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: awesomenotes
+      POSTGRES_USER: awesomenotes
+      POSTGRES_PASSWORD: awesomenotes
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U awesomenotes -d awesomenotes"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
   server:
     build:
       context: .
       dockerfile: server/Dockerfile
     ports:
       - "8080:8080"
+    environment:
+      DATABASE_URL: jdbc:postgresql://db:5432/awesomenotes
+      DATABASE_USER: awesomenotes
+      DATABASE_PASSWORD: awesomenotes
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db-data:
