@@ -4,7 +4,8 @@ WORKDIR /workspace
 COPY gradlew ./
 COPY gradle/ gradle/
 COPY server/ server/
-RUN ./gradlew -p server buildFatJar --no-daemon
+COPY api/ api/
+RUN --mount=type=cache,target=/root/.gradle ./gradlew -p server buildFatJar --no-daemon
 
 # Runtime stage: only the JRE and the jar
 FROM eclipse-temurin:17-jre

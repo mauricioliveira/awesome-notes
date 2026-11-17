@@ -1,5 +1,6 @@
 package com.mauricioliveira.awesomenotes.server
 
+import com.mauricioliveira.awesomenotes.server.docs.docsRoutes
 import com.mauricioliveira.awesomenotes.server.health.healthRoutes
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
@@ -22,5 +23,6 @@ fun Application.module() {
     install(CallLogging)
     routing {
         healthRoutes()
+        docsRoutes()
     }
 }
