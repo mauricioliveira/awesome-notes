@@ -2,8 +2,8 @@ package com.mauricioliveira.awesomenotes.server.auth
 
 import com.mauricioliveira.awesomenotes.server.support.jsonField
 import com.mauricioliveira.awesomenotes.server.support.postJson
+import com.mauricioliveira.awesomenotes.server.support.registerAndLogin
 import com.mauricioliveira.awesomenotes.server.support.serverTest
-import io.ktor.client.HttpClient
 import io.ktor.client.request.bearerAuth
 import io.ktor.client.request.post
 import io.ktor.http.HttpStatusCode
@@ -77,10 +77,5 @@ class AuthRoutesTest {
 
         assertEquals(HttpStatusCode.Unauthorized, response.status)
         assertEquals("UNAUTHORIZED", response.jsonField("code"))
-    }
-
-    private suspend fun HttpClient.registerAndLogin(): String {
-        postJson("/auth/register", maria)
-        return postJson("/auth/login", maria).jsonField("token")
     }
 }

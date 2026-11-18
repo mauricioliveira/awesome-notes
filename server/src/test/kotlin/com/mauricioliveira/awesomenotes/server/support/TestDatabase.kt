@@ -2,6 +2,7 @@ package com.mauricioliveira.awesomenotes.server.support
 
 import com.mauricioliveira.awesomenotes.server.config.DatabaseConfig
 import com.mauricioliveira.awesomenotes.server.database.DatabaseFactory
+import com.mauricioliveira.awesomenotes.server.database.NotesTable
 import com.mauricioliveira.awesomenotes.server.database.SessionsTable
 import com.mauricioliveira.awesomenotes.server.database.UsersTable
 import org.jetbrains.exposed.v1.jdbc.Database
@@ -23,6 +24,7 @@ object TestDatabase {
 
     fun reset() {
         transaction(database) {
+            NotesTable.deleteAll()
             SessionsTable.deleteAll()
             UsersTable.deleteAll()
         }

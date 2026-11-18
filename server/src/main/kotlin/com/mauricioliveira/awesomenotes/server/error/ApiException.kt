@@ -19,3 +19,9 @@ class InvalidCredentialsException :
 
 class UnauthorizedException :
     ApiException(HttpStatusCode.Unauthorized, "UNAUTHORIZED", "Authentication required.")
+
+class NoteNotFoundException :
+    ApiException(HttpStatusCode.NotFound, "NOT_FOUND", "Note not found.")
+
+class NoteIdConflictException :
+    ApiException(HttpStatusCode.Conflict, "NOTE_ID_CONFLICT", "This note id cannot be used.")

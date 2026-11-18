@@ -20,7 +20,7 @@ object DatabaseFactory {
         )
         val database = Database.connect(datasource = dataSource)
         transaction(db = database) {
-            SchemaUtils.create(UsersTable, SessionsTable)
+            SchemaUtils.create(UsersTable, SessionsTable, NotesTable)
         }
         return database
     }
