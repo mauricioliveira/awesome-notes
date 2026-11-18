@@ -1,31 +1,45 @@
 package com.mauricioliveira.awesomenotes.server
 
+import com.mauricioliveira.awesomenotes.server.auth.AuthService
+import com.mauricioliveira.awesomenotes.server.auth.PasswordHasher
+import com.mauricioliveira.awesomenotes.server.auth.authRoutes
 import com.mauricioliveira.awesomenotes.server.config.AppConfig
 import com.mauricioliveira.awesomenotes.server.database.DatabaseFactory
+import com.mauricioliveira.awesomenotes.server.database.SessionRepository
+import com.mauricioliveira.awesomenotes.server.database.UserRepository
 import com.mauricioliveira.awesomenotes.server.docs.docsRoutes
+import com.mauricioliveira.awesomenotes.server.error.configureErrorHandling
 import com.mauricioliveira.awesomenotes.server.health.healthRoutes
+import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.calllogging.CallLogging
+import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.routing.routing
 
 fun main() {
     val config = AppConfig.fromEnv()
-    DatabaseFactory.connect(config = config.database)
-    embeddedServer(
-        factory = Netty,
-        port = config.port,
-        host = "0.0.0.0",
-        module = Application::module
-    ).start(wait = true)
+    val database = DatabaseFactory.connect(config = config.database)
+    val authService = AuthService(
+        users = UserRepository(database),
+        sessions = SessionRepository(database),
+        passwordHasher = PasswordHasher(),
+    )
+
+    embeddedServer(factory = Netty, port = config.port, host = "0.0.0.0") {
+        module(authService)
+    }.start(wait = true)
 }
 
-fun Application.module() {
+fun Application.module(authService: AuthService) {
     install(CallLogging)
+    install(ContentNegotiation) { json() }
+    configureErrorHandling()
     routing {
         healthRoutes()
         docsRoutes()
+        authRoutes(authService)
     }
 }

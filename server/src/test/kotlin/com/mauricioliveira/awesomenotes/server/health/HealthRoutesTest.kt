@@ -1,6 +1,6 @@
 package com.mauricioliveira.awesomenotes.server.health
 
-import com.mauricioliveira.awesomenotes.server.module
+import io.ktor.server.routing.routing
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
@@ -12,7 +12,7 @@ class HealthRoutesTest {
 
     @Test
     fun `health returns 200 OK`() = testApplication {
-        application { module() }
+        application { routing { healthRoutes() } }
 
         val response = client.get("/health")
         assertEquals(HttpStatusCode.OK, response.status)

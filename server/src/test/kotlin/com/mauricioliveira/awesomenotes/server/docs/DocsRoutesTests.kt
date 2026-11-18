@@ -1,6 +1,6 @@
 package com.mauricioliveira.awesomenotes.server.docs
 
-import com.mauricioliveira.awesomenotes.server.module
+import io.ktor.server.routing.routing
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
@@ -13,7 +13,7 @@ class DocsRoutesTests {
 
     @Test
     fun `serves the OpenApi contract`() = testApplication {
-        application { module() }
+        application { routing { docsRoutes() } }
 
         val response = client.get("/openapi/openapi.yaml")
         assertEquals(HttpStatusCode.OK, response.status)
@@ -22,7 +22,7 @@ class DocsRoutesTests {
 
     @Test
     fun `serves SwaggerUI`() = testApplication {
-        application { module() }
+        application { routing { docsRoutes() } }
 
         val response = client.get("/docs")
         assertEquals(HttpStatusCode.OK, response.status)

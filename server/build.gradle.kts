@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ktor)
 }
 
@@ -29,9 +30,15 @@ dependencies {
     implementation(libs.exposed.jdbc)
     implementation(libs.postgresql)
     implementation(libs.hikari)
+    implementation(libs.ktor.server.content.negotiation)
+    implementation(libs.ktor.server.status.pages)
+    implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.exposed.java.time)
+    implementation(libs.bcrypt)
 
     testImplementation(libs.ktor.server.test.host)
     testImplementation(kotlin("test"))
+    testImplementation(libs.testcontainers.postgresql)
 }
 
 tasks.processResources {
