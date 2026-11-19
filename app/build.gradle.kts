@@ -43,6 +43,7 @@ dependencies {
     implementation(projects.core.storage)
     implementation(projects.core.database)
     implementation(projects.feature.auth)
+    implementation(projects.feature.notes)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)

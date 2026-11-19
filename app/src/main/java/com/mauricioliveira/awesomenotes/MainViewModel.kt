@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 
 sealed interface SessionState {
     /** The stored token has not been read yet. */
@@ -17,7 +16,7 @@ sealed interface SessionState {
 }
 
 class MainViewModel(
-    private val authRepository: AuthRepository,
+    authRepository: AuthRepository,
 ) : ViewModel() {
 
     val sessionState: StateFlow<SessionState> =
@@ -28,9 +27,4 @@ class MainViewModel(
                 started = SharingStarted.WhileSubscribed(5_000),
                 initialValue = SessionState.Loading,
             )
-
-    // Temporary: the notes list will own logout once feature:notes exists.
-    fun logout() {
-        viewModelScope.launch { authRepository.logout() }
-    }
 }

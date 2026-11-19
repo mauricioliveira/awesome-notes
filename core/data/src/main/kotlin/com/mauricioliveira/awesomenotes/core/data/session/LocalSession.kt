@@ -13,10 +13,10 @@ internal class LocalSession(
     private val authApi: AuthApi,
 ) {
 
-    suspend fun start(token: String) {
+    suspend fun start(token: String, username: String) {
         // No notes from a previous user may survive into this session.
         noteDao.deleteAll()
-        tokenStore.save(token)
+        tokenStore.save(token, username)
         authApi.clearCachedToken()
     }
 

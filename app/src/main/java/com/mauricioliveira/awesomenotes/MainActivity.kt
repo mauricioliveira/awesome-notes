@@ -9,7 +9,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mauricioliveira.awesomenotes.core.ui.component.LoadingView
 import com.mauricioliveira.awesomenotes.core.ui.theme.AwesomeNotesTheme
 import com.mauricioliveira.awesomenotes.navigation.AuthNavHost
-import com.mauricioliveira.awesomenotes.navigation.NotesPlaceholder
+import com.mauricioliveira.awesomenotes.navigation.NotesNavHost
 import org.koin.compose.viewmodel.koinViewModel
 
 class MainActivity : ComponentActivity() {
@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
                 when (sessionState) {
                     SessionState.Loading -> LoadingView()
                     SessionState.LoggedOut -> AuthNavHost()
-                    SessionState.LoggedIn -> NotesPlaceholder(onLogout = viewModel::logout)
+                    SessionState.LoggedIn -> NotesNavHost()
                 }
             }
         }

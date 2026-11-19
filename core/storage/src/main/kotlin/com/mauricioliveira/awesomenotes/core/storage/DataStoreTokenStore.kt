@@ -13,15 +13,25 @@ internal class DataStoreTokenStore(
 
     override val token: Flow<String?> = dataStore.data.map { it[TOKEN_KEY] }
 
-    override suspend fun save(token: String) {
-        dataStore.edit { it[TOKEN_KEY] = token }
+    override val username: Flow<String?> = dataStore.data.map { it[USERNAME_KEY] }
+
+    override suspend fun save(token: String, username: String) {
+        // One edit, so the token and the username are always written together.
+        dataStore.edit {
+            it[TOKEN_KEY] = token
+            it[USERNAME_KEY] = username
+        }
     }
 
     override suspend fun clear() {
-        dataStore.edit { it.remove(TOKEN_KEY) }
+        dataStore.edit {
+            it.remove(TOKEN_KEY)
+            it.remove(USERNAME_KEY)
+        }
     }
 
     private companion object {
         val TOKEN_KEY = stringPreferencesKey("session_token")
+        val USERNAME_KEY = stringPreferencesKey("session_username")
     }
 }

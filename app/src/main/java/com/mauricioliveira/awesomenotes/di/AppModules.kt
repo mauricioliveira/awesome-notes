@@ -6,6 +6,7 @@ import com.mauricioliveira.awesomenotes.core.database.di.databaseModule
 import com.mauricioliveira.awesomenotes.core.network.di.networkModule
 import com.mauricioliveira.awesomenotes.core.storage.di.storageModule
 import com.mauricioliveira.awesomenotes.feature.auth.di.authModule
+import com.mauricioliveira.awesomenotes.feature.notes.di.notesModule
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
@@ -20,5 +21,6 @@ val appModules = listOf(
     databaseModule,
     dataModule,
     authModule,
+    notesModule,
     mainModule,
 )

@@ -21,13 +21,15 @@ internal class DefaultAuthRepository(
             .map { it != null }
             .distinctUntilChanged()
 
+    override val username: Flow<String?> = tokenStore.username
+
     override suspend fun register(username: String, password: String): Result<Unit> =
         resultOf { authApi.register(CredentialsDto(username, password)) }
 
     override suspend fun login(username: String, password: String): Result<Unit> =
         resultOf {
             val response = authApi.login(CredentialsDto(username, password))
-            session.start(response.token)
+            session.start(response.token, username)
         }
 
     override suspend fun logout() {

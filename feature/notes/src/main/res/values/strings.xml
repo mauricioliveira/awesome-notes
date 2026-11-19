@@ -1,0 +1,49 @@
+<resources>
+    <string name="notes_title">Notes</string>
+    <string name="notes_new">New note</string>
+    <string name="notes_loading">Loading notes</string>
+    <string name="notes_empty_title">No notes yet</string>
+    <string name="notes_empty_message">Your notes will show up here. Tap New note to write the first one.</string>
+    <string name="notes_error_title">Couldn\'t load your notes</string>
+    <string name="notes_error_offline">We can\'t reach the server right now. Check your internet connection and try again.</string>
+    <string name="notes_offline">Can\'t reach the server. Showing notes saved on this device.</string>
+    <string name="notes_refresh_failed">Couldn\'t refresh. Showing notes saved on this device.</string>
+    <string name="edited_today">Today, %1$s</string>
+    <string name="edited_yesterday">Yesterday</string>
+
+    <string name="account_button">Account, logged in as %1$s</string>
+    <string name="account_logged_in_here">Logged in on this device</string>
+    <string name="account_log_out">Log out</string>
+    <string name="logout_title">Log out?</string>
+    <string name="logout_message">Your notes stay safe on the server. This device forgets them until you log in again.</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="editor_back">Back to notes</string>
+    <string name="editor_delete">Delete note</string>
+    <string name="editor_save">Save</string>
+    <string name="editor_saving">Saving…</string>
+    <string name="editor_title_hint">Title</string>
+    <string name="editor_content_hint">Start writing…</string>
+    <string name="editor_title_missing">Add a title to save this note.</string>
+    <string name="editor_loading">Loading note</string>
+    <string name="editor_new_note">New note</string>
+    <string name="editor_new_not_saved">New note · not saved</string>
+    <string name="editor_edited_today">Edited today, %1$s</string>
+    <string name="editor_edited_yesterday">Edited yesterday</string>
+    <string name="editor_edited_on">Edited %1$s</string>
+    <string name="editor_changes_not_saved">%1$s · changes not saved</string>
+    <string name="editor_save_failed">Couldn\'t save. Check your connection and try again.</string>
+    <string name="editor_delete_failed">Couldn\'t delete. Check your connection and try again.</string>
+    <string name="editor_not_found_title">This note isn\'t available</string>
+    <string name="editor_not_found_message">It may have been deleted on another device.</string>
+    <string name="editor_back_to_notes">Back to notes</string>
+
+    <string name="discard_title">Discard changes?</string>
+    <string name="discard_message">Your edits to “%1$s” haven\'t been saved. If you leave now, they will be lost.</string>
+    <string name="discard_message_new">This note hasn\'t been saved. If you leave now, it will be lost.</string>
+    <string name="discard_keep_editing">Keep editing</string>
+    <string name="discard_confirm">Discard</string>
+    <string name="delete_title">Delete this note?</string>
+    <string name="delete_message">“%1$s” will be deleted from all your devices. This can\'t be undone.</string>
+    <string name="delete_confirm">Delete</string>
+</resources>

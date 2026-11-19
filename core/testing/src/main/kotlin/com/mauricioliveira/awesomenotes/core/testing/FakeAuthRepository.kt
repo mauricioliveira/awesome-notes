@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 class FakeAuthRepository : AuthRepository {
 
     override val isLoggedIn = MutableStateFlow(false)
+    override val username = MutableStateFlow<String?>(null)
 
     var registerError: AppError? = null
     var loginError: AppError? = null
@@ -31,11 +32,13 @@ class FakeAuthRepository : AuthRepository {
         gate?.await()
         loginError?.let { return Result.failure(it) }
         isLoggedIn.value = true
+        this.username.value = username
         return Result.success(Unit)
     }
 
     override suspend fun logout() {
         logoutCalls++
         isLoggedIn.value = false
+        username.value = null
     }
 }

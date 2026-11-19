@@ -37,6 +37,7 @@ class DefaultAuthRepositoryTest {
 
         assertTrue(result.isSuccess)
         assertEquals("abc", tokenStore.token.value)
+        assertEquals("maria", repository.username.first())
         assertTrue(repository.isLoggedIn.first())
         assertTrue(noteDao.notes.value.isEmpty())
 
@@ -75,12 +76,13 @@ class DefaultAuthRepositoryTest {
 
     @Test
     fun `logout clears the token and the notes even when the server is unreachable`() = runTest {
-        tokenStore.save("abc")
+        tokenStore.save("abc", "maria")
         server.handler = { throw IOException("offline") }
 
         repository.logout()
 
         assertNull(tokenStore.token.value)
+        assertNull(repository.username.first())
         assertTrue(noteDao.notes.value.isEmpty())
         assertEquals(false, repository.isLoggedIn.first())
     }
