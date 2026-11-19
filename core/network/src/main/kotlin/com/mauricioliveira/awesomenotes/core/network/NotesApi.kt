@@ -11,7 +11,7 @@ import io.ktor.client.request.post
 import io.ktor.client.request.put
 import io.ktor.client.request.setBody
 
-class NotesApi internal constructor(private val client: HttpClient) {
+class NotesApi(private val client: HttpClient) {
 
     suspend fun getNotes(): List<NoteDto> =
         client.get("notes").body()

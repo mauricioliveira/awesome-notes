@@ -15,7 +15,7 @@ import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-internal object HttpClientFactory {
+object HttpClientFactory {
 
     fun create(
         engine: HttpClientEngine,

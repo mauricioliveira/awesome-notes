@@ -9,7 +9,7 @@ import io.ktor.client.plugins.auth.providers.BearerAuthProvider
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 
-class AuthApi internal constructor(private val client: HttpClient) {
+class AuthApi(private val client: HttpClient) {
 
     suspend fun register(credentials: CredentialsDto) {
         client.post("auth/register") { setBody(credentials) }
