@@ -4,7 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mauricioliveira.awesomenotes.core.ui.component.LoadingView
 import com.mauricioliveira.awesomenotes.core.ui.theme.AwesomeNotesTheme
@@ -21,12 +25,19 @@ class MainActivity : ComponentActivity() {
                 val viewModel: MainViewModel = koinViewModel()
                 val sessionState by viewModel.sessionState.collectAsStateWithLifecycle()
 
-                // The session decides which graph exists, so login, logout and an expired
-                // session never leave screens of the other graph in the back stack (ADR-023).
-                when (sessionState) {
-                    SessionState.Loading -> LoadingView()
-                    SessionState.LoggedOut -> AuthNavHost()
-                    SessionState.LoggedIn -> NotesNavHost()
+                // Paints the theme background behind every state, including the loading one,
+                // which has no Scaffold of its own.
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background,
+                ) {
+                    // The session decides which graph exists, so login, logout and an expired
+                    // session never leave screens of the other graph in the back stack (ADR-023).
+                    when (sessionState) {
+                        SessionState.Loading -> LoadingView()
+                        SessionState.LoggedOut -> AuthNavHost()
+                        SessionState.LoggedIn -> NotesNavHost()
+                    }
                 }
             }
         }
