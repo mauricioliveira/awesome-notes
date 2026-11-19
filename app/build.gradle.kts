@@ -37,9 +37,23 @@ kotlin {
 }
 
 dependencies {
+    implementation(projects.core.ui)
+    implementation(projects.core.data)
+    implementation(projects.core.network)
+    implementation(projects.core.storage)
+    implementation(projects.core.database)
+    implementation(projects.feature.auth)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.android)
+    implementation(libs.bundles.feature)
     debugImplementation(libs.androidx.compose.ui.tooling)
+
+    testImplementation(libs.bundles.unit.test)
+    testImplementation(platform(libs.koin.bom))
+    testImplementation(libs.koin.test)
 }

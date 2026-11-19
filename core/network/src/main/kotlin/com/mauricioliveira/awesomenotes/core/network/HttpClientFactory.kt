@@ -8,7 +8,9 @@ import io.ktor.client.plugins.auth.providers.BearerTokens
 import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.logging.ANDROID
 import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
@@ -45,7 +47,11 @@ object HttpClientFactory {
             connectTimeoutMillis = 10_000
         }
         if (enableLogging) {
-            install(Logging) { level = LogLevel.INFO }
+            install(Logging) {
+                // The default logger goes to SLF4J, which prints nothing on Android.
+                logger = Logger.ANDROID
+                level = LogLevel.INFO
+            }
         }
     }
 }

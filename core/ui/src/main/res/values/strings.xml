@@ -1,0 +1,10 @@
+<resources>
+    <string name="error_no_connection">No internet connection. Check your network and try again.</string>
+    <string name="error_unauthorized">Your session has expired. Please log in again.</string>
+    <string name="error_invalid_credentials">Wrong username or password. Check them and try again.</string>
+    <string name="error_username_taken">This username is taken. Try another one.</string>
+    <string name="error_not_found">This note no longer exists.</string>
+    <string name="error_server">The server had a problem. Please try again.</string>
+    <string name="error_unknown">Something went wrong. Please try again.</string>
+    <string name="retry">Try again</string>
+</resources>
