@@ -6,6 +6,24 @@ A notes app for Android with its own backend. You can register, log in and out, 
 - **Backend:** Ktor and PostgreSQL. One command starts both with Docker Compose.
 - **Contract:** [`api/openapi.yaml`](api/openapi.yaml) (OpenAPI 3.0.3) is the only thing the app and the server share.
 
+## Demo
+
+Log in, write a new note, save it and open another one:
+
+<p align="center">
+  <img src="docs/media/demo.gif" width="300" alt="Logging in, creating and saving a note, then opening another note">
+</p>
+
+### Screenshots
+
+| Login | Register validation | Notes | Editor |
+|:---:|:---:|:---:|:---:|
+| <img src="docs/media/login-light.png" width="200" alt="Login screen"> | <img src="docs/media/register-errors-light.png" width="200" alt="Register screen with password errors"> | <img src="docs/media/list-light.png" width="200" alt="Notes list"> | <img src="docs/media/editor-light.png" width="200" alt="Note editor"> |
+
+| Empty list | Can't reach the server | Notes (dark) | Editor (dark) |
+|:---:|:---:|:---:|:---:|
+| <img src="docs/media/empty-light.png" width="200" alt="Empty notes list"> | <img src="docs/media/error-light.png" width="200" alt="Error state with a retry button"> | <img src="docs/media/list-dark.png" width="200" alt="Notes list in dark theme"> | <img src="docs/media/editor-dark.png" width="200" alt="Note editor in dark theme"> |
+
 ## Running
 
 You need Docker and a recent Android Studio. Gradle downloads the JDK 17 toolchain it needs.
@@ -49,6 +67,7 @@ awesome-notes/
 ├── core/                  # domain, data, network, storage, database, ui, testing
 ├── feature/               # auth, notes
 ├── server/                # Ktor backend (separate Gradle build, own Dockerfile)
+├── docs/media/            # Demo GIF and screenshots used in this README
 ├── docker-compose.yml
 └── AI_USAGE.md            # How AI tools were used in this project
 ```
